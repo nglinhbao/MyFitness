@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MyFitness</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_email">Email</string>
+    <string name="enter_pass">Password</string>
+    <string name="name">Name</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="signup_name">Sign up</string>
+    <string name="signin_name">Sign in</string>
+    <string name="add_button">Add</string>
+    <string name="next_button">Next</string>
+    <string name="enter_ex_name">Name</string>
+    <string name="enter_reps">Reps</string>
+    <string name="enter_sets">Sets</string>
+    <string name="enter_rest">Rest</string>
+    <string name="time">00:00</string>
+    <string name="start_button">Start</string>
+    <string name="back_button">Back</string>\
+
+</resources>
