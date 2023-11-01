@@ -61,6 +61,7 @@ class SignInFragment : Fragment() {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, "Log in successfully", Toast.LENGTH_SHORT).show()
+                Log.d("current dest", navController.currentDestination.toString())
                 navController.navigate(R.id.action_signInFragment_to_homeFragment)
             }
             else {

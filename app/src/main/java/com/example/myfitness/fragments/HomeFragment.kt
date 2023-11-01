@@ -1,6 +1,7 @@
 package com.example.myfitness.fragments
 
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,17 +10,22 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myfitness.MainActivity
 import com.example.myfitness.R
 import com.example.myfitness.databinding.FragmentHomeBinding
 import com.example.myfitness.databinding.FragmentSignInBinding
 import com.example.myfitness.utilities.Exercise
 import com.example.myfitness.utilities.ExercisesAdapter
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -41,6 +47,12 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
     private lateinit var ExerciseList: MutableList<Exercise>
     private lateinit var exerciseAdapter: ExercisesAdapter
     private lateinit var timerFragment: TimerFragment
+    private lateinit var mainActivity: MainActivity
+    private lateinit var navView: NavigationView
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var headerView: View
+    private lateinit var nameHeader: TextView
+    private lateinit var emailHeader: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,17 +77,6 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
         inflater?.inflate(R.menu.nav_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.logout_button -> {
-                mAuth.signOut()
-                navController.navigate(R.id.action_homeFragment_to_splashFragment)
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -89,6 +90,25 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
         exerciseAdapter = ExercisesAdapter(ExerciseList)
         exerciseAdapter.setListener(this)
         binding.recyclerView.adapter = exerciseAdapter
+
+        mainActivity = activity as MainActivity
+        navView = mainActivity.getNavView()
+        drawerLayout = mainActivity.getDrawerLayout()
+
+        headerView = navView.getHeaderView(0)
+        nameHeader = headerView.findViewById<TextView>(R.id.nameHeader)
+        emailHeader = headerView.findViewById<TextView>(R.id.emailHeader)
+
+        // Get the user's information from Firebase
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            val name = user.displayName
+            val email = user.email
+
+            // Update the TextViews with the user's information
+            nameHeader.text = name
+            emailHeader.text = email
+        }
 
         getExerciseFromFirebase()
 
@@ -106,6 +126,25 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
                 childFragmentManager,
                 "AddExerciseFragment"
             )
+        }
+
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.logout -> {
+                    nameHeader.text = "Name"
+                    emailHeader.text = "Email"
+                    if (navController.currentDestination?.id == R.id.homeFragment) {
+                        mAuth.signOut()
+                        navController.navigate(R.id.action_homeFragment_to_splashFragment)
+                    }
+                    else if (navController.currentDestination?.id == R.id.timerFragment) {
+                        mAuth.signOut()
+                        navController.navigate(R.id.action_timerFragment_to_splashFragment)
+                    }
+                }
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
         }
     }
 
