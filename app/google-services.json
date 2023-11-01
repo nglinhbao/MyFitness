@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "30672846963",
-    "project_id": "myfitness-35c30",
-    "storage_bucket": "myfitness-35c30.appspot.com"
+    "project_number": "118929878115",
+    "project_id": "myfitness-dbe29",
+    "storage_bucket": "myfitness-dbe29.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:30672846963:android:95161e3360357e6e59ea06",
+        "mobilesdk_app_id": "1:118929878115:android:2e2f873e81e93127cbdc56",
         "android_client_info": {
           "package_name": "com.example.myfitness"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBhMP2XFVrpF8wlTKzD_snIZ778igMOetg"
+          "current_key": "AIzaSyBc9doTChRHeDQ1GLmLvnE2dwgErbeh8Yw"
         }
       ],
       "services": {

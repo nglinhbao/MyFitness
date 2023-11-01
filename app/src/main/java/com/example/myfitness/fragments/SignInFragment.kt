@@ -2,11 +2,13 @@ package com.example.myfitness.fragments
 
 import android.media.MediaPlayer.OnCompletionListener
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.myfitness.R
@@ -25,6 +27,10 @@ class SignInFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSignInBinding.inflate(inflater, container, false)
+
+        val toolbar = binding.toolbarSignIn
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
         return binding.root
     }
 
@@ -33,6 +39,7 @@ class SignInFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
         mAuth = FirebaseAuth.getInstance()
+        Log.d("auth", mAuth.toString())
 
         binding.signUpButton.setOnClickListener {
             navController.navigate(R.id.action_signInFragment_to_signUpFragment)

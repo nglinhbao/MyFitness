@@ -55,7 +55,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@color/md_theme_light_onPrimary"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:hintEnabled="false">
@@ -64,7 +64,7 @@
                 android:id="@+id/userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/white"
+                android:background="@color/md_theme_light_onPrimary"
                 android:hint="@string/enter_email"
                 android:inputType="textEmailAddress"
                 android:paddingStart="12dp"
@@ -92,7 +92,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@color/md_theme_light_onPrimary"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:hintEnabled="false"
@@ -102,7 +102,7 @@
                 android:id="@+id/userPass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/md_theme_light_onPrimary"
                 android:hint="@string/enter_pass"
                 android:inputType="textPassword"
                 android:paddingStart="12dp"
@@ -120,6 +120,17 @@
         android:text="@string/signin_name"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/cardView1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSignIn" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

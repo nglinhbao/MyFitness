@@ -83,7 +83,6 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
         mAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference.child("Exercises").child(mAuth.currentUser?.uid.toString())
 
-        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
         ExerciseList = mutableListOf()
