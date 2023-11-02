@@ -91,6 +91,7 @@ class TimerFragment : Fragment() {
         startTimer = true
         timer = object : CountDownTimer(seconds.toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
+                //change the view
                 binding.set.text = "Set " + set_time.toString()
                 val minutes = ((millisUntilFinished / 1000) % 3600 ) / 60
                 val seconds = (millisUntilFinished / 1000) % 60
@@ -105,6 +106,7 @@ class TimerFragment : Fragment() {
                     // Create a rest timer that lasts for 10 seconds
                     restTimer = object : CountDownTimer(10000, 1000) {
                         override fun onTick(millisUntilFinished: Long) {
+                            //change the view
                             binding.set.text = "Rest for set " + set_time.toString()
                             val minutes = ((millisUntilFinished / 1000) % 3600 ) / 60
                             val seconds = (millisUntilFinished / 1000) % 60
@@ -124,6 +126,7 @@ class TimerFragment : Fragment() {
                     restTimer.start()
                 }
                 else {
+                    //reset the timer
                     set_time = 1
                     binding.set.text = "Set " + set_time.toString()
                 }

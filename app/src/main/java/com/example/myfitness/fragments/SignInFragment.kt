@@ -28,6 +28,7 @@ class SignInFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSignInBinding.inflate(inflater, container, false)
 
+        //get toolbar
         val toolbar = binding.toolbarSignIn
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
@@ -41,10 +42,12 @@ class SignInFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         Log.d("auth", mAuth.toString())
 
+        //navigate to sign up
         binding.signUpButton.setOnClickListener {
             navController.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
+        //sign in button handling
         binding.signInButton.setOnClickListener {
             val email = binding.userEmail.text.toString()
             val pass = binding.userPass.text.toString()
@@ -57,6 +60,7 @@ class SignInFragment : Fragment() {
 
     }
 
+    //authenticate user
     private fun userSignIn(email: String, pass: String) {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
             if (it.isSuccessful) {

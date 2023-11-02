@@ -28,6 +28,7 @@ class AddExerciseFragment : DialogFragment() {
         this.listener = listener
     }
 
+    //object to receive arguments
     companion object {
         const val TAG = "AddExerciseFragment"
         @JvmStatic
@@ -53,6 +54,7 @@ class AddExerciseFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //get arguments
         if (arguments != null) {
             exercise = Exercise(arguments?.getString("id").toString(), arguments?.getString("name").toString(),arguments?.getString("sets").toString(),arguments?.getString("reps").toString())
             binding.exName.setText(exercise!!.name)

@@ -128,6 +128,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
             )
         }
 
+        //navigation drawer listener
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 //handle log out
@@ -150,6 +151,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
     }
 
     private fun getExerciseFromFirebase() {
+        //get exercises from database
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -195,6 +197,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
             "reps" to reps
         )
 
+        //push to database
         database.push().setValue(exerciseData).addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, "Exercise added", Toast.LENGTH_SHORT).show()
@@ -224,6 +227,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
             "reps" to reps
         )
 
+        //update to database
         val map = HashMap<String, Any>()
         map[exercise.id] = exerciseData
         database.updateChildren(map).addOnCompleteListener {
@@ -240,6 +244,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
     }
 
     override fun onDelete(exercise: Exercise, position: Int) {
+        //delete from database
         database.child(exercise.id).removeValue().addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show()
@@ -249,11 +254,13 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
         }
     }
 
+    //when users click on the exercises
     override fun onClick(exercise: Exercise, position: Int) {
         val action = HomeFragmentDirections.actionHomeFragmentToTimerFragment(exercise)
         navController.navigate(action)
     }
 
+    //edit
     override fun onEdit(exercise: Exercise, position: Int) {
         if (popUpFragment != null)
             childFragmentManager.beginTransaction().remove(popUpFragment!!).commit()

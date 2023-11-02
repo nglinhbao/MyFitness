@@ -44,6 +44,7 @@ class SignUpFragment : Fragment() {
             navController.navigate(R.id.action_signUpFragment_to_signInFragment)
         }
 
+        //sign up button handling
         binding.signUpButton.setOnClickListener {
             val email = binding.userEmail.text.toString()
             val pass = binding.userPass.text.toString()
@@ -57,6 +58,7 @@ class SignUpFragment : Fragment() {
 
     }
 
+    //authentication
     private fun userRegistration(email: String, pass: String, name: String) {
         mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
             if (it.isSuccessful) {
@@ -65,6 +67,7 @@ class SignUpFragment : Fragment() {
                     .setDisplayName(name)
                     .build()
 
+                //add user to database
                 user?.updateProfile(profileUpdates)
                     ?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {

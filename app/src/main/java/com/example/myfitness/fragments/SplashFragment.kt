@@ -34,6 +34,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun splashDelay(auth: FirebaseAuth, navController: NavController) {
+        //navigation handling
         Handler(Looper.myLooper()!!).postDelayed(Runnable {
             if (auth.currentUser != null) {
                 navController.navigate(R.id.action_splashFragment_to_homeFragment)
