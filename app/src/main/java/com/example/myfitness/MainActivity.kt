@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
+    // close drawer navigation
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -35,10 +36,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //get navigation view
     fun getNavView(): NavigationView {
         return navView
     }
 
+    //get drawer layout
     fun getDrawerLayout(): DrawerLayout {
         return drawerLayout
     }

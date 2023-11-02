@@ -62,7 +62,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val toolbar = binding.toolbar // Assuming you have a toolbar in your layout
+        val toolbar = binding.toolbar // get toolbar in your layout
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         return binding.root
@@ -130,6 +130,7 @@ class HomeFragment : Fragment(), AddExerciseFragment.OnDialogNextButtonClickList
 
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
+                //handle log out
                 R.id.logout -> {
                     nameHeader.text = "Name"
                     emailHeader.text = "Email"

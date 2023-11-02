@@ -69,27 +69,34 @@ class AddExerciseFragment : DialogFragment() {
             val sets = binding.sets.text.toString()
             val reps = binding.reps.text.toString()
 
-
             if (ex_name.isNotEmpty() && sets.isNotEmpty() && reps.isNotEmpty()) {
-                //Toast.makeText(context, ex_name + sets + reps, Toast.LENGTH_SHORT).show()
-                if (exercise == null) {
-                    listener.saveTask(ex_name, binding.exName, sets, binding.sets, reps, binding.reps)
+                // Check if sets and reps are integers
+                if (sets.toIntOrNull() != null && reps.toIntOrNull() != null) {
+                    // Check if exercise name is a string and does not contain any numbers
+                    if (ex_name.all { it.isLetter() }) {
+                        if (exercise == null) {
+                            listener.saveTask(ex_name, binding.exName, sets, binding.sets, reps, binding.reps)
+                        } else {
+                            exercise?.name = ex_name
+                            exercise?.sets = sets
+                            exercise?.reps = reps
+                            exercise?.let { it1 -> listener.updateTask(it1, ex_name, binding.exName, sets, binding.sets, reps, binding.reps) }
+                        }
+                    } else {
+                        Toast.makeText(context, "Please enter a valid name", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(context, "Please enter valid numbers for sets and reps", Toast.LENGTH_SHORT).show()
                 }
-                else {
-                    exercise?.name = ex_name
-                    exercise?.sets = sets
-                    exercise?.reps = reps
-                    exercise?.let { it1 -> listener.updateTask(it1, ex_name, binding.exName, sets, binding.sets, reps, binding.reps) }
-                }
-            }
-            else {
-                //Toast.makeText(context, "Please fill in", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.closeButton.setOnClickListener {
             dismiss()
         }
+
     }
 
     interface OnDialogNextButtonClickListener{
