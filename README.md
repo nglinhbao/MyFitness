@@ -1,0 +1,1 @@
+In this project, I developed an exercise management app which is called MyFitness. In this app, the user can add, edit, and remove the exercises. Moreover, when an exercise is clicked, the timer will appear to count down the time taken for that exercise.
